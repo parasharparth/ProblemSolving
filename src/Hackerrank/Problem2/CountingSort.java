@@ -1,27 +1,16 @@
 package Hackerrank.Problem2;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class Solution {
+public class CountingSort {
 
 	public static void main(String[] args){
-
-		List<Integer> arr = new ArrayList<>();
-		arr.add(8);arr.add(4);arr.add(2);arr.add(5);arr.add(6);
-		List<Integer> result;
-		result = countingSort(arr);
-		for(int i=0; i<result.size(); i++)
-			System.out.print(result.get(i));
+		int[] arr = new int[]{1,5,4,2,3};
+		int[] result = countingSort(arr, arr.length);
+		for(int i=0; i<result.length; i++)
+			System.out.print(result[i]);
 		System.out.println();
 	}
 
-	public static List<Integer> countingSort(List<Integer> list){
-		int[] array = new int[list.size()];
-		for(int i=0; i<list.size(); i++){
-			array[i] = list.get(i);
-		}
-		int size = array.length;
+	public static int[] countingSort(int[] array, int size){
 		int[] output = new int[size + 1];
 
 		// Find the largest element of the array
@@ -54,23 +43,10 @@ public class Solution {
 			count[array[i]]--;
 		}
 
-		for(int i=0; i<output.length-1; i++)
-		{
-			System.out.println(output[i]);
+		// Copy the sorted elements into original array
+		for (int i = 0; i < size; i++) {
+			array[i] = output[i];
 		}
-		List<Integer> result = new ArrayList<>();
-		for(int i=0; i<output.length-1; i++)
-			result.add(output[i]);
-		return result;
-	}
-
-	public static int findMax(int[] arr){
-		int max = arr[0];
-		for(int i=0; i<arr.length; i++){
-			if(arr[i] > max){
-				max = arr[i];
-			}
-		}
-		return max;
+		return array;
 	}
 }
